@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy Rose Day Riya 🌹</title>
+
+<style>
+:root{
+  --pink:#ff2f6e;
+  --rose:#ff5d8f;
+  --deep:#a4133c;
+  --bg1:#2b0012;
+  --bg2:#5a001f;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{
+  min-height:100vh;
+  background:radial-gradient(circle at top,var(--bg2),var(--bg1));
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* ===== MUSIC ===== */
+audio{display:none}
+
+/* ===== LOCK SCREEN ===== */
+.lock{
+  position:fixed;inset:0;z-index:100;
+  background:radial-gradient(circle,var(--rose),var(--deep));
+  display:flex;align-items:center;justify-content:center;
+}
+.lock-box{
+  background:rgba(0,0,0,0.45);
+  backdrop-filter:blur(14px);
+  padding:40px;
+  border-radius:30px;
+  text-align:center;
+  width:90%;max-width:380px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6)
+}
+.lock-box h1{color:#ffd6e0;margin-bottom:10px}
+.lock-box input{
+  margin-top:18px;width:100%;padding:14px;border:none;border-radius:25px;
+  text-align:center;font-size:1rem
+}
+.lock-box button{
+  margin-top:20px;padding:14px 34px;border:none;border-radius:30px;
+  background:linear-gradient(135deg,#ff7aa2,#ff2f6e);
+  color:#fff;font-size:1.05rem;cursor:pointer
+}
+
+/* ===== FLOATING LOVE ===== */
+.floating{position:fixed;inset:0;pointer-events:none;z-index:1}
+.float{position:absolute;animation:floatUp linear infinite}
+@keyframes floatUp{
+  from{transform:translateY(110vh) scale(.7);opacity:0}
+  20%{opacity:1}
+  to{transform:translateY(-10vh) scale(1.1) rotate(360deg);opacity:0}
+}
+
+/* ===== HERO ===== */
+.hero{text-align:center;padding:90px 20px 20px;position:relative;z-index:2}
+.hero h1{font-size:clamp(2.5rem,6vw,4rem);color:#ffb3c6}
+.hero span{color:#ff4d8d}
+.typing{
+  margin-top:18px;font-size:1.2rem;
+  white-space:nowrap;overflow:hidden;
+  border-right:3px solid #ff4d8d;width:0;
+  animation:typing 7s steps(70,end) forwards,blink .7s infinite
+}
+@keyframes typing{to{width:100%}}
+@keyframes blink{50%{border-color:transparent}}
+
+/* ===== CANDLES ===== */
+.candles{display:flex;justify-content:center;gap:25px;margin:35px 0}
+.candle{
+  width:18px;height:80px;background:#ffb3c6;border-radius:10px;position:relative
+}
+.flame{
+  position:absolute;top:-18px;left:50%;transform:translateX(-50%);
+  width:14px;height:20px;background:radial-gradient(circle,#fff,#ff9f1c,#ff4d8d);
+  border-radius:50%;animation:flicker .4s infinite alternate
+}
+@keyframes flicker{from{transform:translateX(-50%) scale(.9)}to{transform:translateX(-50%) scale(1.1)}}
+
+/* ===== BOUQUET ===== */
+.bouquet{text-align:center;margin-top:20px}
+.bouquet img{width:180px;animation:pop 2.5s infinite;filter:drop-shadow(0 20px 40px rgba(255,0,90,.6))}
+@keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+
+/* ===== SLIDES ===== */
+.slideshow{max-width:900px;margin:20px auto;padding:0 20px;z-index:2;position:relative}
+.slides{border-radius:30px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.6)}
+.slides img{width:100%;height:350px;object-fit:cover;display:none}
+.slides img.active{display:block}
+
+/* ===== LOVE LETTER ===== */
+.letter{
+  max-width:900px;margin:35px auto;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(18px);
+  border-radius:35px;padding:40px;
+  box-shadow:0 30px 80px rgba(0,0,0,.7)
+}
+.letter h2{text-align:center;color:#ffb3c6;margin-bottom:25px}
+.letter p{line-height:1.9;font-size:1.08rem;margin-bottom:18px}
+
+/* ===== INTERACTIVE ===== */
+.actions{text-align:center;margin:30px}
+.actions button{
+  background:linear-gradient(135deg,#ff7aa2,#ff2f6e);
+  border:none;padding:16px 36px;border-radius:35px;color:#fff;
+  font-size:1.05rem;cursor:pointer;box-shadow:0 20px 45px rgba(255,47,110,.6)
+}
+
+/* ===== CONFETTI ===== */
+.confetti{position:fixed;width:10px;height:10px;animation:conf 3s linear forwards}
+@keyframes conf{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+footer{text-align:center;padding:40px;opacity:.8}
+@media(min-width:768px){.slides img{height:460px}}
+</style>
+</head>
+<body>
+
+<!-- ONLINE MUSIC -->
+<audio id="bgm" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1f0d58c28b.mp3" type="audio/mpeg">
+</audio>
+
+<!-- LOCK -->
+<div class="lock" id="lock">
+  <div class="lock-box">
+    <h1>Only for Riya 💖</h1>
+    <p>Enter your name</p>
+    <input id="pass" placeholder="Kanchu" />
+    <button onclick="unlock()">Enter Love 🌹</button>
+  </div>
+</div>
+
+<div class="floating" id="floating"></div>
+
+<section class="hero">
+  <h1>Happy <span>Rose Day</span><br>My Kanchu 🌹</h1>
+  <div class="typing">Riya — my Kanchu, Puntu, Nanu — you are my forever 💖</div>
+
+  <div class="candles" onclick="toggleCandle()">
+    <div class="candle"><div class="flame"></div></div>
+    <div class="candle"><div class="flame"></div></div>
+    <div class="candle"><div class="flame"></div></div>
+  </div>
+  <p style="opacity:.8;font-size:.9rem">Tap candles to light the night ✨</p>
+
+  <div class="bouquet"><img src="bouquet.png" alt="Bouquet"/></div>
+</section>
+
+<section class="slideshow">
+  <div class="slides-wrapper">
+    <div class="slides">
+      <img src="img1.jpg" class="active" />
+      <img src="img2.jpg" />
+      <img src="img3.jpg" />
+      <img src="img4.jpg" />
+      <img src="img5.jpg" />
+      <img src="img6.jpg" />
+      <img src="img7.jpg" />
+      <img src="img8.jpg" />
+      <img src="img9.jpg" />
+      <img src="img10.jpg" />
+      <img src="img11.jpg" />
+      <img src="img12.jpg" />
+      <img src="img13.jpg" />
+      <img src="img14.jpg" />
+      <img src="img15.jpg" />
+      <img src="img16.jpg" />
+      <img src="img17.jpg" />
+      <img src="img18.jpg" />
+    </div>
+
+    <div class="slide-overlay">
+      <h3>Our Memories 💖</h3>
+      <p>Every picture is a heartbeat with you</p>
+    </div>
+
+    <div class="slide-controls">
+      <button onclick="prevSlide()">❮</button>
+      <button onclick="nextSlide()">❯</button>
+    </div>
+  </div>
+</section>
+
+<section class="letter">
+<h2>My Love Letter ❤️</h2>
+<p>We met at the Pulchowk Music Fest — loud music, crowded hearts, and somehow my world became quiet the moment I saw you.</p>
+<p>I woke up early just for you. Nights till 11, mornings till 7 — waiting all day just for 6 PM to hear from you again.</p>
+<p>Boudha, Taragaon Museum, tiny momos that I teased you for — our first date that felt real and perfect.</p>
+<p>Indrathan Heaven Danda, NPP, and slowly you let your guard down — just for me.</p>
+<p>From the moment you said yes at A-One Café, I promised to always choose you.</p>
+<p>Our future — beaches, water places, traveling the world — forever together.</p>
+</section>
+
+<div class="actions">
+  <button onclick="celebrate()">Celebrate Our Love 💕</button>
+</div>
+
+<footer>
+Made with all my heart for you, Riya 💘
+</footer>
+
+<script>
+const floating=document.getElementById('floating');
+const icons=['🌹','❤️','💖','💘','🌸'];
+function floatLove(){
+ const s=document.createElement('span');s.className='float';s.textContent=icons[Math.floor(Math.random()*icons.length)];
+ s.style.left=Math.random()*100+'vw';s.style.fontSize=18+Math.random()*28+'px';s.style.animationDuration=6+Math.random()*6+'s';
+ floating.appendChild(s);setTimeout(()=>s.remove(),12000);
+}
+setInterval(floatLove,260);
+
+let candleOn=false;
+function toggleCandle(){
+ candleOn=!candleOn;
+ document.body.style.background=candleOn?
+ 'radial-gradient(circle at top,#000,#1a0010)':
+ 'radial-gradient(circle at top,var(--bg2),var(--bg1))';
+ document.querySelectorAll('.flame').forEach(f=>f.style.display=candleOn?'block':'none');
+ if(candleOn)document.getElementById('bgm').play();
+}
+
+/* SLIDESHOW LOGIC */
+const slides=document.querySelectorAll('.slides img');
+let current=0;
+
+function showSlide(i){
+ slides[current].classList.remove('active');
+ current=(i+slides.length)%slides.length;
+ slides[current].classList.add('active');
+}
+function nextSlide(){showSlide(current+1)}
+function prevSlide(){showSlide(current-1)}
+setInterval(()=>nextSlide(),3200);
+
+function unlock(){
+ const v=document.getElementById('pass').value.toLowerCase();
+ if(v==='riya'||v==='kanchu'){
+  document.getElementById('lock').style.display='none';
+  document.getElementById('bgm').play();
+  celebrate();
+ }
+}
+
+function celebrate(){
+ for(let i=0;i<90;i++){
+  const c=document.createElement('div');c.className='confetti';
+  c.style.left=Math.random()*100+'vw';c.style.top='-10px';
+  c.style.background=`hsl(${Math.random()*360},100%,70%)`;
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(),3000);
+ }
+}
+</script>
+</body>
+</html>
